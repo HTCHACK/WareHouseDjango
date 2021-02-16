@@ -1,0 +1,99 @@
+.product {
+    padding: 4rem;
+}
+
+.display_table {
+    box-shadow: 0 0 10px #bdbdbd, 0 0 40px #bdbdbd, 0 0 80px #bdbdbd;
+    width: 100%;
+}
+
+.add-items {
+    text-decoration: none;
+    color: white;
+}
+
+.img-product {
+    width: 30px;
+    height: 30px;
+}
+
+
+.table {
+    font-size: 13px;
+    text-align: center;
+    width: 100%;
+    text-align: center;
+}
+
+/*Make alternating colors for the table rows*/
+.table tr:nth-child(odd) {
+    background: #B8CAE4
+}
+
+.table tr:nth-child(even) {
+    background: #dae5f4
+}
+
+th {
+    background-color: #337ab7;
+    color: white;
+}
+
+th.th {
+    padding-bottom: 1.35rem;
+}
+
+.header {
+    font-family: helvetica;
+    color: #337ab7;
+    font-size: 50px;
+    text-align: center;
+    width: 100%;
+    display: block;
+    font-weight: bolder;
+}
+
+.add_form {
+    width: 100%;
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 2px solid #efefef;
+    box-shadow: 0 0 10px #efefef, 0 0 40px #efefef, 0 0 80px #efefef;
+}
+
+.login {
+    width: 100%;
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 2px solid #efefef;
+}
+
+/*Table paination styling*/
+.paging-nav {
+    text-align: right;
+    padding-top: 2px;
+}
+
+.paging-nav a {
+    margin: auto 1px;
+    text-decoration: none;
+    display: inline-block;
+    padding: 1px 7px;
+    background: #91b9e6;
+    color: white;
+    border-radius: 3px;
+}
+
+.paging-nav .selected-page {
+    background: #187ed5;
+    font-weight: bold;
+}
+
+.paging-nav,
+#tableData {
+    width: 400px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+}
+
+/* End Table paination styling*/

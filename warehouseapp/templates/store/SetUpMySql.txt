@@ -1,0 +1,25 @@
+STEP 1: INSTALLING MYSQL SERVER, WORKBENCH AND SOME PREREQUISITES
+Install MYSQL database, MYSQL workbench, and some prerequisites to connect Django to the database.
+
+sudo apt install mysql-server libmysqlclient-dev python-dev mysql-workbench
+
+sudo apt-get install mysql-server libmysqlclient-dev python-dev mysql-workbench
+
+pip install mysqlclient
+
+database name = warehouse
+Username = myusername
+Password = myPassword
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'warehouse',
+        'USER': 'myusername',
+        'PASSWORD': 'myPassword',
+    }
+}
+
+python manage.py migrate
+
+

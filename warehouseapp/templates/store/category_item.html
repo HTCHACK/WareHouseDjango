@@ -1,0 +1,90 @@
+{% extends 'store/index.html' %}
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>WareHouseAPP</title>
+<link rel="shortcut icon" href="{% static 'images/postgresql-32.png' %}">
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+<!-- Custom fonts for this template-->
+<link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+
+<!-- Page level plugin CSS-->
+<link href="{% static 'vendor/datatables/dataTables.bootstrap4.css' %}" rel="stylesheet">
+
+<!-- Custom styles for this template-->
+<link href="{% static 'css/sb-admin.css' %}" rel="stylesheet">
+
+{% block content %}
+<div class="content-wrapper">
+
+
+
+    <!-- /.content-wrapper -->
+    <div class="product">
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li {% if message.tags %} class="{{message.tags}}" {% endif %} style="list-style: none;
+            font-size: 25px;
+            font-weight: bold;
+            background-color: #F4F6F9;
+            color: #135eaa;
+            text-shadow: 6px 6px 6px #135eaa;
+            font-weight: bold;
+            text-align: center;">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <div class="display_table">
+            <table class='table'>
+                <thead>
+                    <tr>
+                        <th class="th">COUNT</th>
+                        <th class="th">CATEGORY</th>
+                        <th><a class="btn btn-primary" value='submit' href="{% url 'store:add_category' %}"><i
+                                    class="fas fa-fw fa-plus"></i> Add Category</a></th>
+                    </tr>
+                </thead>
+                {% for instance in name %}
+                <tr>
+                    <td class="td">{{forloop.counter}}</td>
+                    <td class="td">{{instance.name}}</td>
+                    <td><a class="btn btn-primary" href="{% url 'store:update_category' instance.id %}"><i class="fas fa-fw fa-edit"></i></a> <a
+                            class="btn btn-danger" href="{% url 'store:delete_category' instance.id %}"><i class="fas fa-fw fa-trash-alt"></i></a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <!--End of display table-->
+    </div>
+</div>
+<!-- /#wrapper -->
+
+{% endblock %}
+
+<!-- Bootstrap core JavaScript-->
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+<!-- Page level plugin JavaScript-->
+<script src="{% static 'vendor/chart.js/Chart.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/jquery.dataTables.js' %}"></script>
+<script src="{% static 'vendor/datatables/dataTables.bootstrap4.js' %}"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="js/sb-admin.min.js"></script>
+
+<!-- Demo scripts for this page-->
+<script src="js/demo/datatables-demo.js"></script>
+<script src="js/demo/chart-area-demo.js"></script>
+<script src="{% static 'js/pager/paging.js' %}"></script>

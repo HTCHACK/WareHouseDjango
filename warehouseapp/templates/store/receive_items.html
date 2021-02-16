@@ -1,0 +1,68 @@
+{% extends 'store/index.html' %}
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>WareHouseAPP</title>
+<link rel="shortcut icon" href="{% static 'images/postgresql-32.png' %}">
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+<!-- Custom fonts for this template-->
+<link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+
+<!-- Page level plugin CSS-->
+<link href="{% static 'vendor/datatables/dataTables.bootstrap4.css' %}" rel="stylesheet">
+
+<!-- Custom styles for this template-->
+<link href="{% static 'css/sb-admin.css' %}" rel="stylesheet">
+
+<style>
+    th.th {
+        padding-bottom: 1.35rem;
+    }
+
+    td.td {
+        padding-top: 1.35rem;
+    }
+</style>
+{% block content %}
+<div class="content-wrapper">
+
+    <!-- /.content-wrapper -->
+    <div style="padding-left: 4rem;padding-right:4rem;padding-bottom: 2rem;width: 100%;">
+
+        <p style="padding-top: 0.8rem;font-weight: bold;color: #337ab7;font-size: 28px;">{{title}}</p>
+        <form method='POST' action='' class="add_form">
+            {% csrf_token %}
+            {{form|crispy}}
+            <input class="btn btn-primary" type="submit" value='Save' required />
+        </form>
+    </div>
+</div>
+</div>
+{% endblock %}
+
+<!-- Bootstrap core JavaScript-->
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+<!-- Page level plugin JavaScript-->
+<script src="{% static 'vendor/chart.js/Chart.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/jquery.dataTables.js' %}"></script>
+<script src="{% static 'vendor/datatables/dataTables.bootstrap4.js' %}"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="js/sb-admin.min.js"></script>
+
+<!-- Demo scripts for this page-->
+<script src="js/demo/datatables-demo.js"></script>
+<script src="js/demo/chart-area-demo.js"></script>
+<script src="{% static 'js/pager/paging.js' %}"></script>

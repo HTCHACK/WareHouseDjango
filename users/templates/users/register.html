@@ -1,0 +1,74 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>WareHouseAPP</title>
+<link rel="shortcut icon" href="{% static 'images/postgresql-32.png' %}">
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+<!-- Custom fonts for this template-->
+<link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+
+<!-- Page level plugin CSS-->
+<link href="{% static 'vendor/datatables/dataTables.bootstrap4.css' %}" rel="stylesheet">
+
+<!-- Custom styles for this template-->
+<link href="{% static 'css/sb-admin.css' %}" rel="stylesheet">
+
+
+{% block content %}
+<div id="wrapper" style="background-color: #135eaa;padding-top: 14%;padding-bottom: 14%;">
+
+    
+    <!-- /.content-wrapper -->
+    <div style="padding-left: 4rem;padding-right:4rem;padding-bottom: 2rem;padding-top:2rem;width: 100%;">
+        {% if form.errors %}
+        <p>Your username and password didn't match . Please try again</p>
+        {% endif %}
+        <div style="background-color: #efefef;width: 100%;
+        padding-top: 1.5rem;padding-left: 1.5rem;padding-top: 1.5rem;padding-bottom: 0.8rem;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        border: 2px solid #efefef;">
+            <a class="btn btn-danger" href="{% url 'users:role' %}"><i
+                class="fas fa-fw fa-arrow-left"></i> Back</a>
+        </div>
+        <form method="POST" action="{% url 'users:register' %}" style="background-color: #fff;width: 100%;
+        padding: 1.5rem;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        border: 2px solid #efefef;">
+            {% csrf_token %}
+            {{form|crispy}}
+            <button class="btn btn-primary" name='submit' style="display: none;">Signup</button>
+            <input type="hidden" name="next" value="{% url 'users:profile' %}">
+            <a href="{% url 'users:login' %}" class="btn btn-success" name="submit">Signin as a user</a>
+            <a href="{% url 'users:login' %}" class="btn btn-info" name="submit">Signin as a Admin</a>
+        </form>
+    </div>
+</div>
+<!-- /#wrapper -->
+
+{% endblock content %}
+<!-- Bootstrap core JavaScript-->
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+<!-- Page level plugin JavaScript-->
+<script src="{% static 'vendor/chart.js/Chart.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/jquery.dataTables.js' %}"></script>
+<script src="{% static 'vendor/datatables/dataTables.bootstrap4.js' %}"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="js/sb-admin.min.js"></script>
+
+<!-- Demo scripts for this page-->
+<script src="js/demo/datatables-demo.js"></script>
+<script src="js/demo/chart-area-demo.js"></script>

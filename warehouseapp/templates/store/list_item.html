@@ -1,0 +1,130 @@
+{% extends 'store/index.html' %}
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>WareHouseAPP</title>
+<link rel="shortcut icon" href="{% static 'images/postgresql-32.png' %}">
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+<!-- Custom fonts for this template-->
+<link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+
+<!-- Page level plugin CSS-->
+<link href="{% static 'vendor/datatables/dataTables.bootstrap4.css' %}" rel="stylesheet">
+
+<!-- Custom styles for this template-->
+<link href="{% static 'css/sb-admin.css' %}" rel="stylesheet">
+
+{% block content %}
+<div class="content-wrapper">
+
+
+
+    <!-- /.content-wrapper -->
+    <div class="product">
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li {% if message.tags %} class="{{message.tags}}" {% endif %} style="list-style: none;
+            font-size: 25px;
+            font-weight: bold;
+            background-color: #f4f6f9;
+            color: #135eaa;
+            text-shadow: 6px 6px 6px #135eaa;
+            font-weight: bold;
+            text-align: center;">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <form method='POST' action='' style="padding-bottom: 2rem;">
+            {% csrf_token %}
+            {{form|crispy}}
+            <button class="btn btn-primary" type="submit" value='Search'><i
+                    class="fas fa-fw fa-search"></i>Search</button>
+            <a class="btn btn-success" type="button" onclick="window.print()"><i class="fas fa-fw fa-print"></i>
+                Print</a>
+            <!--<button class="btn btn-info" type="button"
+                onclick="document.getElementById('list').style.display='block'"><i class="fas fa-fw fa-list"></i> Show
+                All</button>-->
+        </form>
+        <div class="display_table">
+            <table class='table' >
+                <thead>
+                    <tr>
+                        <th class="th" style="padding-bottom: 1.35rem;">COUNT</th>
+                        <th class="th" style="padding-bottom: 1.35rem;">ITEM NAME</th>
+                        <th class="th" style="padding-bottom: 1.35rem;">CATEGORY</th>
+                        <th class="th" style="padding-bottom: 1.35rem;">ISSUE BY</th>
+                        <th class="th" style="padding-bottom: 1.35rem;">COST USD</th>
+                        <!--<th class="th" style="padding-bottom: 1.35rem;">CREATED ON</th>-->
+                        <th class="th" style="padding-bottom: 1.35rem;">REORDER</th>
+                        <th class="th" style="padding-bottom: 1.35rem;">QUANTITY</th>
+                        <th class="th" style="padding-bottom: 1.35rem;">EDIT</th>
+                        <th class="th" style="padding-bottom: 1.35rem;">DELETE</th>
+                        <th><a class="btn btn-primary" value='submit' href="{% url 'store:add_items' %}"><i
+                                    class="fas fa-fw fa-plus"></i> Add</a></th>
+                        <!--<th><button class="btn btn-warning" type="button"
+                                onclick="document.getElementById('list').style.display='none'"><i
+                                    class="fas fa-fw fa-list"></i> Close</button></th>-->
+                    </tr>
+                </thead>
+                {% for instance in queryset %}
+                <tr>
+                    <td class="td" style="padding-top: 1.35rem;">{{forloop.counter}}</td>
+                    <td class="td" style="padding-top: 1.35rem;">{{instance.item_name}}</td>
+                    <td class="td" style="padding-top: 1.35rem;">{{instance.category}}</td>
+                    <td class="td" style="padding-top: 1.35rem;">{{instance.issue_by}}</td>
+                    <td class="td" style="padding-top: 1.35rem;">{{instance.cost}}$</td>
+                    <!--<td class="td" style="padding-top: 1.35rem;">{{instance.created_on}}<br>{{instance.updated_on}}</td>-->
+                    <td class="td" style="padding-top: 1.35rem;"><a
+                            href="{% url 'store:reorder_level' instance.id %}">{{instance.reorder_level}}</a></td>
+                    <td>{% if instance.quantity >= instance.reorder_level %}<a class="btn btn-danger"
+                            href="{% url 'store:product_detail' instance.id %}"><i
+                                class="fas fa-fw fa-info"></i>{{instance.quantity}}</a>{% else %}<a
+                            class="btn btn-warning" href="{% url 'store:product_detail' instance.id %}"><i
+                                class="fas fa-fw fa-info"></i>{{instance.quantity}}</a>{% endif %}</td>
+                    <td><a class="btn btn-primary" href="{% url 'store:update_items' instance.id %}"><i
+                                class="fas fa-fw fa-edit"></i></a></td>
+                    <td><a class="btn btn-danger" href="{% url 'store:delete_items' instance.id %}"><i
+                                class="fas fa-fw fa-trash-alt"></i></a></td>
+                    <td><a class="btn btn-info" href="{% url 'store:issue_items' instance.id %}"><i class="fas fa-fw fa-paper-plane"></i> send</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <!--End of display table-->
+    </div>
+</div>
+{% endblock %}
+
+<!-- Bootstrap core JavaScript-->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+<script src="{% static 'js/pager/paging.js' %}"></script>
+<script src="{% static 'js/my.js' %}"></script>
+
+
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+<!-- Page level plugin JavaScript-->
+<script src="{% static 'vendor/chart.js/Chart.min.js' %}"></script>
+<script src="{% static 'vendor/datatables/jquery.dataTables.js' %}"></script>
+<script src="{% static 'vendor/datatables/dataTables.bootstrap4.js' %}"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="js/sb-admin.min.js"></script>
+
+<!-- Demo scripts for this page-->
+<script src="js/demo/datatables-demo.js"></script>
+<script src="js/demo/chart-area-demo.js"></script>
+
